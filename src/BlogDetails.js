@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { Loading } from 'react-loading-dot'
+
 
 import useFetch from "./UseFetch";
 
@@ -23,16 +25,18 @@ const BlogDetails = ({handleError}) => {
   }, [error]);
 
   return (
-    <div className="blog-details">
-      { isPending && <div>Loading...</div> }
-      { blog && (
-        <article>
-          <h2>{ blog.title }</h2>
-          <p>Written by: { blog.author }</p>
-          <div>{ blog.body }</div>
-          <button onClick={handleClick}>delete</button>
-        </article>
-      )}
+    <div>
+      { isPending && <Loading background="#f1356d" /> }
+      <div className="blog-details">
+        { blog && (
+          <article>
+            <h2>{ blog.title }</h2>
+            <p>Written by: { blog.author }</p>
+            <div>{ blog.body }</div>
+            <button onClick={handleClick}>delete</button>
+          </article>
+        )}
+      </div>
     </div>
   );
 }
